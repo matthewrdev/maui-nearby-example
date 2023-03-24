@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:MauiNearby"
+             x:Class="MauiNearby.MainPage">
+
+    <VerticalStackLayout
+        Spacing="25"
+        Padding="30,0"
+        VerticalOptions="FillAndExpand">
+
+        <Label
+            Text="Nearby Sync Example"
+            SemanticProperties.HeadingLevel="Level1"
+            FontSize="32"
+            HorizontalOptions="Center" />
+
+        <Label Text="{Binding DeviceSummary}"/>
+        <Label Text="{Binding ServiceSummary}"/>
+
+        <ContentView HeightRequest="1" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" Margin="1"/>
+        
+        <Label Text="{Binding NearbyDevicesSummary}"/>
+        <Label Text="{Binding ConnectedDevicesSummary}"/>
+        
+        <ContentView HeightRequest="1" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" Margin="1"/>
+
+        <Label Text="Tickets:"/>
+
+        <CollectionView ItemsSource="{Binding SortedTickets}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+            <CollectionView.ItemTemplate>
+
+                <DataTemplate>
+
+                    <VerticalStackLayout>
+
+                        <Label Text="{Binding Summary}"/>
+
+                        <Label Text="(Current Device)"
+                               FontSize="Small"
+                               FontAttributes="Bold"
+                               IsVisible="{Binding ., Converter={local:IsThisDeviceConverter}}"/>
+
+                        <ContentView HeightRequest="1"
+                                     BackgroundColor="Gray"
+                                     HorizontalOptions="FillAndExpand" Margin="4,1,1,1"/>
+
+                    </VerticalStackLayout>
+
+                </DataTemplate>
+
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+        
+        <ContentView HeightRequest="1" BackgroundColor="Gray" HorizontalOptions="FillAndExpand" Margin="1"/>
+
+        <Button Text="Create Ticket" Command="{Binding CreateTicketCommand}"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>
+
